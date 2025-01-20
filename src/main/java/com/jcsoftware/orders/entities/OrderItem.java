@@ -36,7 +36,7 @@ public class OrderItem implements Serializable {
 		this.price = price;
 	}
 	
-	public Double subTotal() {
+	public Double getSubTotal() {
 		return quantity * price;
 	}
 	
@@ -90,6 +90,8 @@ public class OrderItem implements Serializable {
 		OrderItem other = (OrderItem) obj;
 		return Objects.equals(id, other.id);
 	}
+	
+	
 	
 	
 	
