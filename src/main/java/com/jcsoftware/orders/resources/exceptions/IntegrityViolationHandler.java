@@ -7,20 +7,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.jcsoftware.orders.services.exceptions.ResourceNotFoundException;
+import com.jcsoftware.orders.services.exceptions.IntegrityViolationException;
+
 
 import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
-public class ResourceExceptionHandler {
+public class IntegrityViolationHandler {
 	
-	@ExceptionHandler(ResourceNotFoundException.class)
-	public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException e,HttpServletRequest request){
+	@ExceptionHandler(IntegrityViolationException.class)
+	public ResponseEntity<StandardError> integrityViolation(IntegrityViolationException e,HttpServletRequest request){
 		
-		String error = "Resource not found";
-		HttpStatus status = HttpStatus.NOT_FOUND;
+		String error = "Data Integrity Violation";
+		HttpStatus status = HttpStatus.FORBIDDEN;
 		StandardError err = new StandardError(Instant.now(),status.value(),error,e.getMessage(),request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
 
 }
+

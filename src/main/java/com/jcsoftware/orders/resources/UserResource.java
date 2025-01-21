@@ -43,8 +43,10 @@ public class UserResource {
 		 return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
 	}
 	@DeleteMapping(value="/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
+	public ResponseEntity<User> delete(@PathVariable Long id){
+		//User user = service.findById(id);
 		service.delete(id);
+		//return ResponseEntity.ok().body(user);
 		return ResponseEntity.noContent().build();
 	}
 	@PutMapping(value="/{id}")
